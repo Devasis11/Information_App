@@ -3,6 +3,7 @@ package com.example.jobdata
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val btnEnglish = findViewById<Button>(R.id.button_English)
-        val btnHindi = findViewById<Button>(R.id.button_Hindi)
-        val btnOdia = findViewById<Button>(R.id.button_Odia)
+        val btnEnglish = findViewById<LinearLayout>(R.id.button_English)
+        val btnHindi = findViewById<LinearLayout>(R.id.button_Hindi)
+        val btnOdia = findViewById<LinearLayout>(R.id.button_Odia)
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
