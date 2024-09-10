@@ -94,7 +94,44 @@
                 android:textSize="16sp"
                 tools:ignore="Autofill,HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
 
+            <Button
+                android:id="@+id/buttonGenerateOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#ff33b5e5"
+                android:text="OTP जनरेट करें"
+                android:textColor="#455A64"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,HardcodedText,TextContrastCheck,TouchTargetSizeCheck" />
+
+
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="OTP दर्ज करें"
+            android:visibility="gone"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:textSize="16sp"
+            tools:ignore="Autofill,HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
+
+        <Button
+            android:id="@+id/buttonVerifyOTP"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#ff33b5e5"
+            android:textColor="#455A64"
+            android:text="OTP सत्यापित करें"
+            android:textStyle="bold"
+            tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,HardcodedText,TextContrastCheck" />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,7 +159,7 @@
                 tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,HardcodedText,TextContrastCheck" />
 
             <Button
-                android:id="@+id/buttonDelete3"
+                android:id="@+id/buttonDelete4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -183,7 +220,7 @@
                 tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,HardcodedText,TextContrastCheck" />
 
             <Button
-                android:id="@+id/buttonDelete4"
+                android:id="@+id/buttonDelete3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
