@@ -174,11 +174,11 @@ class OdiaActivity : AppCompatActivity() {
 
         buttondelete3.setOnClickListener {
             buttonaadhaar.text = "Upload Certificate"
-            buttonUploadFile10.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
+            buttonaadhaar.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
         }
         buttondelete4.setOnClickListener {
             buttonpic.text = "Upload Picture"
-            buttonUploadFile12.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
+            buttonpic.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
         }
 
         buttonSubmit.setOnClickListener {
