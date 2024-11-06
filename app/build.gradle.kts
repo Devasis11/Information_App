@@ -42,8 +42,6 @@ android {
 
 dependencies {
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -53,7 +51,6 @@ dependencies {
     implementation(libs.firebase.database)
     implementation (libs.firebase.core)
     implementation(libs.kotlin.stdlib.jdk7)
-    implementation(libs.firebase.auth)
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

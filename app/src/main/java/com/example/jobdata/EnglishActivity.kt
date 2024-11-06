@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -19,27 +18,17 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseException
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import java.util.concurrent.TimeUnit
 
 class EnglishActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private lateinit var storage: FirebaseStorage
     private lateinit var storageReference: StorageReference
-    private lateinit var mAuth: FirebaseAuth
 
     private lateinit var editTextFullName: EditText
     private lateinit var editTextAddress: EditText
@@ -59,11 +48,6 @@ class EnglishActivity : AppCompatActivity() {
     private lateinit var buttondelete4: Button
     private lateinit var buttonpic: Button
     private lateinit var buttonaadhaar: Button
-    private lateinit var textViewContactNumbers: EditText
-    private lateinit var edtOTP: EditText
-    private lateinit var verifyOTPBtn: Button
-    private lateinit var generateOTPBtn: Button
-    private var verificationId: String? = null
 
     private var picUrl: Uri? = null
     private var aadhaarUrl: Uri? = null
@@ -75,11 +59,13 @@ class EnglishActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_english)
 
+        val textViewContactNumbers = findViewById<EditText>(R.id.editTextContacts)
+
+
 
             database = FirebaseDatabase.getInstance().reference
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference
-        mAuth = FirebaseAuth.getInstance()
 
         editTextFullName = findViewById(R.id.editTextFullName)
         editTextAddress = findViewById(R.id.editTextAddress)
@@ -99,10 +85,6 @@ class EnglishActivity : AppCompatActivity() {
         buttondelete4 = findViewById(R.id.buttonDelete4)
         buttonpic=findViewById(R.id.buttonUploadPic)
         buttonaadhaar=findViewById(R.id.buttonUploadAadhaar)
-        textViewContactNumbers = findViewById(R.id.editTextContacts)
-        edtOTP = findViewById(R.id.edt_otp)
-        verifyOTPBtn = findViewById(R.id.buttonVerifyOTP)
-        generateOTPBtn = findViewById(R.id.buttonGenerateOTP)
 
         val years = listOf("N/A") + (2024 downTo 1990).map { it.toString() }
         val specializations = listOf("N/A", "Arts", "Commerce", "PCM", "PCB")
@@ -110,30 +92,6 @@ class EnglishActivity : AppCompatActivity() {
         spinner12thYear.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
         spinner12thSpecialization.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, specializations)
-
-        generateOTPBtn.setOnClickListener {
-            if (textViewContactNumbers.text.toString().length != 10)
-                Toast.makeText(this, "Invalid Contact Number", Toast.LENGTH_SHORT).show()
-            else {
-                val phoneNumber = "+91"+textViewContactNumbers.text.toString()
-                if (!TextUtils.isEmpty(phoneNumber)) {
-                    Toast.makeText(this,"OTP sent",Toast.LENGTH_SHORT).show()
-                    sendVerificationCode(phoneNumber)
-                } else {
-                    Toast.makeText(this, "Please enter a valid phone number", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }
-
-        verifyOTPBtn.setOnClickListener {
-            val otp = edtOTP.text.toString()
-            if (!TextUtils.isEmpty(otp)) {
-                verifyCode(otp)
-            } else {
-                Toast.makeText(this, "Please enter valid the OTP", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         buttonpic.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -169,11 +127,11 @@ class EnglishActivity : AppCompatActivity() {
 
         buttondelete3.setOnClickListener {
             buttonaadhaar.text = "Upload Certificate"
-            buttonaadhaar.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
+            buttonUploadFile10.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
         }
         buttondelete4.setOnClickListener {
             buttonpic.text = "Upload Picture"
-            buttonpic.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
+            buttonUploadFile12.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
         }
 
         buttonSubmit.setOnClickListener {
@@ -359,58 +317,6 @@ class EnglishActivity : AppCompatActivity() {
         deleteFileFromStorage("Aadhaar_certificate.pdf",editTextFullName.text.toString())
     }
 
-    private fun sendVerificationCode(phoneNumber: String) {
-        edtOTP.isVisible=true
-        verifyOTPBtn.isVisible=true
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            phoneNumber,
-            60,
-            TimeUnit.SECONDS,
-            this,
-            object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                    signInWithCredential(credential)
-                }
-                override fun onVerificationFailed(e: FirebaseException) {
-                    Toast.makeText(this@EnglishActivity, e.message, Toast.LENGTH_LONG).show()
-                }
-
-                override fun onCodeSent(verificationId: String, forceResendingToken: PhoneAuthProvider.ForceResendingToken) {
-                    super.onCodeSent(verificationId, forceResendingToken)
-                    this@EnglishActivity.verificationId = verificationId
-                }
-            }
-        )
-    }
-
-    private fun verifyCode(otp: String) {
-        val credential = PhoneAuthProvider.getCredential(verificationId!!, otp)
-        signInWithCredential(credential)
-    }
-
-    private fun signInWithCredential(credential: PhoneAuthCredential) {
-        mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this, object : OnCompleteListener<AuthResult> {
-                override fun onComplete(task: Task<AuthResult>) {
-                    if (task.isSuccessful) {
-                        Toast.makeText(this@EnglishActivity, "Verification is successfully", Toast.LENGTH_SHORT).show()
-                        otpVerified()
-                    } else {
-                        Toast.makeText(this@EnglishActivity, "Verification failed", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun otpVerified(){
-        edtOTP.isVisible=false
-        verifyOTPBtn.isVisible=false
-        generateOTPBtn.text="Verified"
-        generateOTPBtn.isEnabled=false
-        generateOTPBtn.backgroundTintList = getColorStateList(android.R.color.holo_green_light)
-    }
-
     private fun deleteFileFromStorage(fileType: String, name: String) {
         val fileName = when (fileType) {
             "10th_certificate.pdf" -> "10th_certificate_${name}.pdf"
@@ -433,8 +339,6 @@ class EnglishActivity : AppCompatActivity() {
         spinner12thSpecialization.setSelection(0)
         editTextDiplomaSpecialization.text.clear()
         editTextSkills.text.clear()
-        generateOTPBtn.text="Generate OTP"
-        generateOTPBtn.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
         buttonUploadFile10.text = "Upload Certificate"
         buttonUploadFile10.backgroundTintList = getColorStateList(android.R.color.holo_blue_light)
         buttonUploadFile12.text = "Upload Certificate"
