@@ -33,8 +33,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:ignore="DisableBaselineAlignment">
+            android:orientation="horizontal">
 
 
             <LinearLayout
@@ -54,7 +53,7 @@
                     android:layout_height="40dp"
                     android:padding="6dp"
                     android:text="Click for English"
-                    android:textColor="#000000"
+                    android:textColor="#0D47A1"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:gravity="center"
@@ -68,8 +67,7 @@
                     android:padding="5dp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textColor="#000000"
-                    tools:ignore="HardcodedText" />
+                    android:textColor="#0D47A1" />
             </LinearLayout>
 
 
@@ -93,7 +91,7 @@
                     android:textSize="16sp"
                     android:padding="6dp"
                     android:gravity="center"
-                    android:textColor="#000000"
+                    android:textColor="#880E4F"
                     tools:ignore="HardcodedText,VisualLintButtonSize" />
 
                 <TextView
@@ -104,8 +102,7 @@
                     android:padding="5dp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textColor="#020202"
-                    tools:ignore="HardcodedText" />
+                    android:textColor="#880E4F" />
             </LinearLayout>
 
         </LinearLayout>
@@ -123,27 +120,26 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="#81C784"
+                android:text="ଓଡିଆ ପାଇଁ କ୍ଲିକ୍ କରନ୍ତୁ"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 android:padding="6dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="ଓଡିଆ ପାଇଁ କ୍ଲିକ୍ କରନ୍ତୁ"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText,VisualLintButtonSize,TextContrastCheck" />
+                android:background="#81C784"
+                android:textColor="#2E7D32"
+                tools:ignore="HardcodedText,VisualLintButtonSize" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="#81C784"
-                android:gravity="center"
-                android:padding="5dp"
                 android:text="ଅ"
-                android:textColor="#000000"
-                android:textSize="35sp"
+                android:textSize="35dp"
+                android:padding="5dp"
+                android:gravity="center"
                 android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                android:background="#81C784"
+                android:textColor="#2E7D32"/>
         </LinearLayout>
 
     </LinearLayout>
