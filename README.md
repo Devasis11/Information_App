@@ -36,3 +36,8 @@ It can be used as a base structure for applications that require login systems a
 - Android Studio
 - Kotlin / Java
 - XML Layouts
+
+## Download APK
+Download the latest version of the app from the release page:
+
+[Download APK](https://github.com/your-username/your-repo/releases)
