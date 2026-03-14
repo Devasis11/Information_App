@@ -40,4 +40,4 @@ It can be used as a base structure for applications that require login systems a
 ## Download APK
 Download the latest version of the app from the release page:
 
-[Download APK](https://github.com/your-username/your-repo/releases)
+[Download APK](https://github.com/Devasis11/Information_App/releases/tag/v1.3)
